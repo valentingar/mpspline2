@@ -216,8 +216,14 @@ mpspline_fit1 <- function(s = NULL, p = NULL, var_name = NULL,
     ld <- s[[3]]
     not_1cm <- rep(NA_real_, times = md)
     not_1cm[ud:ld] <- s[[var_name]]
+
+    # create target vector based on d nodes
+    d_ud <- sort(d)[-length(d)] # target upper
+    d_ld <- sort(d)[-1] # target lower
     not_dcm <- rep(NA_real_, times = length(d) - 1)
-    not_dcm[which(d >= ud & d <= ld)] <- s[[var_name]]
+    # replace overlapping with original value
+    not_dcm[which(d_ld >= ud & d_ud <= ld)] <- s[[var_name]]
+
     # constrain input data to supplied limits
     not_1cm[which(not_1cm > vhigh)] <- vhigh
     not_1cm[which(not_1cm < vlow)]  <- vlow

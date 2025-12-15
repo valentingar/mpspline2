@@ -343,3 +343,19 @@ test_that("mpspline works with default output",
              expect_identical(m1, m2)
           )
 )
+
+test_that(
+  "single layer leads to functioning output",
+  {
+    m1 <-
+    data.frame(site = "A",
+               upper = c(0,20,40,60),
+               lower = c(20,40,60,80),
+               value = c(NA,NA,NA,1)) |>
+      mpspline(var_name = "value", lam = 0.1, d = c(0,80), vlow = 0, vhigh = 1000000)
+
+    expect_equal(m1$A$est_dcm, c('000_080_cm' = 1))
+
+
+
+  })
