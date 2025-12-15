@@ -1,3 +1,5 @@
+# mpspline2 (development version)
+
 # v. 0.1.9
 
   * Add ability to spline multiple variables at once, resolving #10 (thanks to @brownag for this update)
